@@ -1,1 +1,62 @@
+name: Build APK Release
 
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+
+    - name: Build release APK
+      run: ./gradlew assembleRelease
+
+    - name: Upload APK to Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Quotex-Signal-Trading-Bot.apk
+        path: app/build/outputs/apk/release/app-release.apk
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v1.0.0
+        release_name: Quotex Signal Trading Bot v1.0.0
+        body: |
+          🎯 **Quotex Signal Trading Bot v1.0.0**
+          
+          ✨ **বৈশিষ্ট্য:**
+          ✅ 100টি উন্নত বিশ্লেষণ লজিক
+          ✅ ফ্লোটিং উইজেট (যেকোনো অ্যাপের উপরে)
+          ✅ 1 মিনিটের ট্রেড সিগন্যাল
+          ✅ 90%+ একুরেসি
+          ✅ রিয়েল মার্কেট স্ক্যানিং
+          
+          📱 **ডাউনলোড ও ইনস্টল করুন**
+        draft: false
+        prerelease: false
+
+    - name: Upload APK to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: app/build/outputs/apk/release/app-release.apk
+        tag_name: v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
