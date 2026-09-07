@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quotex Signal Trading</string>
+    <string name="start_scanning">শুরু করুন</string>
+    <string name="stop_scanning">থামান</string>
+    <string name="signal_up">উপরে ↑</string>
+    <string name="signal_down">নিচে ↓</string>
+    <string name="scanning">স্ক্যান করছে...</string>
+    <string name="analysis_complete">বিশ্লেষণ সম্পন্ন</string>
+    <string name="settings">সেটিংস</string>
+    <string name="about">আমাদের সম্পর্কে</string>
+    <string name="exit">প্রস্থান</string>
+    <string name="enable_floating_widget">ফ্লোটিং উইজেট সক্ষম করুন</string>
+    <string name="disable_floating_widget">ফ্লোটিং উইজেট নিষ্ক্রিয় করুন</string>
+</resources>
